@@ -4,8 +4,6 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/lengkapi/bindings/lengkapi_binding.dart';
 import '../modules/lengkapi/views/lengkapi_view.dart';
-import '../modules/loading/bindings/loading_binding.dart';
-import '../modules/loading/views/loading_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -43,12 +41,6 @@ class AppPages {
       page: () => const LengkapiView(),
       binding: LengkapiBinding(),
       transition: Transition.rightToLeft,
-    ),
-    GetPage(
-      name: _Paths.LOADING,
-      page: () => const LoadingView(),
-      binding: LoadingBinding(),
-      transition: Transition.noTransition,
     ),
   ];
 }
