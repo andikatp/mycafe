@@ -27,7 +27,7 @@ void main() async {
             )
           : GetMaterialApp(
               title: "Application",
-              initialRoute: Routes.SIGNUP,
+              initialRoute: snapshot.hasData ? Routes.HOME : Routes.LENGKAPI,
               getPages: AppPages.routes,
               debugShowCheckedModeBanner: false,
               theme: ThemeData.from(

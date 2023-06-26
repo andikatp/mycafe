@@ -8,15 +8,42 @@ class LengkapiController extends GetxController {
   late final TextEditingController namaCafe;
   late final TextEditingController jumlahLantai;
   late final TextEditingController jumlahKursiPerLantai;
+  late final TextEditingController namaPemilik;
+  late final TextEditingController nomorTeleponPemilik;
+  late final TextEditingController alamatCafe;
+  RxBool isEnabled = false.obs;
   final auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance;
 
-  RxBool isEnabled = false.obs;
-
-  void daftarAkun(String email, String password, String namaCafe,
-      String jumlahLantai, String jumlahKursiPerLantai) async {
+  void daftarAkun(String email, String password) async {
     final isValid = formKey.currentState!.validate();
-    if (isValid) {}
+    if (isValid) {
+      try {
+        await auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) =>
+                fireStore.collection('users').doc(value.user?.uid).set({
+                  'uid': value.user?.uid,
+                  'email': value.user?.email,
+                  'nama_cafe': namaCafe.text,
+                  'nama_pemilik': namaPemilik.text,
+                  'nomorTeleponPemilik': nomorTeleponPemilik.text,
+                  'jumlahLantai': jumlahLantai.text,
+                  'jumlahKursiPerLantai': jumlahKursiPerLantai.text,
+                  'alamatCafe': alamatCafe.text,
+                  'createdAt': value.user?.metadata.creationTime,
+                  'updatedAt': null,
+                }));
+      } on FirebaseAuthException catch (e) {
+        // Get.showSnackbar(GetSnackBar(title: e.message!));
+        print(e);
+      } catch (e) {
+        // Get.showSnackbar(GetSnackBar(
+        //   title: e.toString(),
+        // ));
+        print(e.toString());
+      }
+    }
   }
 
   @override
@@ -51,6 +78,10 @@ class LengkapiController extends GetxController {
           isEnabled.value = false;
         }
       });
+    namaPemilik = TextEditingController();
+    alamatCafe = TextEditingController();
+    nomorTeleponPemilik = TextEditingController();
+
     super.onInit();
   }
 
