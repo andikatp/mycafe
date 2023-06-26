@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "710524238376",
+    "project_id": "mycafe-b3d13",
+    "storage_bucket": "mycafe-b3d13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710524238376:android:6bf9a1fadee1b369e9531d",
+        "android_client_info": {
+          "package_name": "com.example.my_cafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710524238376-kpqb19um0e59g81hh244i6bcpilj736p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK-1-d2vH7Q4eEF4Lpa3ne5_spd-VUvZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710524238376-kpqb19um0e59g81hh244i6bcpilj736p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

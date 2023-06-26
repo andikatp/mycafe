@@ -1,0 +1,32 @@
+name: my_cafe
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: '>=3.0.3 <4.0.0'
+
+dependencies:
+  cloud_firestore: ^4.8.1
+  cupertino_icons: ^1.0.2
+  dotted_dashed_line: ^0.0.3
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
+  flutter:
+    sdk: flutter
+  flutter_keyboard_visibility: ^5.4.1
+  flutter_svg: ^2.0.7
+  get: 4.6.5
+  google_fonts: ^5.1.0
+  lottie: ^2.4.0
+  page_transition: ^2.0.9
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/logo/
