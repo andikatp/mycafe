@@ -97,19 +97,27 @@ class SigninView extends GetView<SigninController> {
               },
             ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Obx(
-                () => ElevatedButton(
-                  onPressed: controller.isEnabled.isTrue ? () {} : null,
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(width, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      )),
-                  child: const Text('Masuk'),
-                ),
-              ),
+            Obx(
+              () => controller.isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Obx(
+                        () => ElevatedButton(
+                          onPressed: controller.isEnabled.isTrue
+                              ? () => controller.signIn()
+                              : null,
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: Size(width, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              )),
+                          child: const Text('Masuk'),
+                        ),
+                      ),
+                    ),
             ),
             const SizedBox(height: 20),
             KeyboardVisibilityBuilder(

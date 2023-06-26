@@ -11,11 +11,13 @@ class LengkapiController extends GetxController {
   late final TextEditingController namaPemilik;
   late final TextEditingController nomorTeleponPemilik;
   late final TextEditingController alamatCafe;
-  RxBool isEnabled = false.obs;
   final auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance;
+  RxBool isEnabled = false.obs;
+  RxBool isLoading = false.obs;
 
   void daftarAkun(String email, String password, String completeNumber) async {
+    isLoading.toggle();
     final isValid = formKey.currentState!.validate();
     if (isValid) {
       try {
@@ -34,6 +36,7 @@ class LengkapiController extends GetxController {
           'createdAt': userData.user?.metadata.creationTime,
           'updatedAt': DateTime.now().toIso8601String(),
         });
+        isLoading.toggle();
       } on FirebaseAuthException catch (e) {
         Get.snackbar(
           'Error',
@@ -42,6 +45,7 @@ class LengkapiController extends GetxController {
           borderWidth: 0.2,
           duration: const Duration(seconds: 2),
         );
+        isLoading.toggle();
       } on FirebaseException catch (e) {
         Get.snackbar(
           'Error',
@@ -50,6 +54,7 @@ class LengkapiController extends GetxController {
           borderWidth: 0.2,
           duration: const Duration(seconds: 2),
         );
+        isLoading.toggle();
       } catch (e) {
         Get.snackbar(
           'Error',
@@ -58,6 +63,7 @@ class LengkapiController extends GetxController {
           borderWidth: 0.2,
           duration: const Duration(seconds: 2),
         );
+        isLoading.toggle();
       }
     }
   }

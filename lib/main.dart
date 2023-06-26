@@ -40,14 +40,17 @@ void main() async {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const SplashScreen();
                   }
-                  print(snapshotStream.hasData);
+                  String initialRoute = Routes.SIGNIN;
+                  if (snapshotStream.hasData) {
+                    if (snapshotStream.data!.emailVerified) {
+                      initialRoute = Routes.HOME;
+                    } else {
+                      initialRoute = Routes.VERIFY_EMAIL;
+                    }
+                  }
                   return GetMaterialApp(
                     title: "Application",
-                    initialRoute: snapshotStream.hasData
-                        ? snapshotStream.data!.emailVerified
-                            ? Routes.HOME
-                            : Routes.VERIFY_EMAIL
-                        : Routes.SIGNIN,
+                    initialRoute: initialRoute,
                     getPages: AppPages.routes,
                     debugShowCheckedModeBanner: false,
                     theme: ThemeData.from(
