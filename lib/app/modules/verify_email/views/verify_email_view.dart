@@ -46,7 +46,7 @@ class VerifyEmailView extends GetView<VerifyEmailController> {
                 child: const Text('Kirim Ulang Email'),
               ),
               TextButton.icon(
-                  onPressed: () {},
+                  onPressed: () => controller.getBackTologin(),
                   icon: const Icon(Icons.arrow_back),
                   label: const Text('Kembali Ke Login'))
             ],
