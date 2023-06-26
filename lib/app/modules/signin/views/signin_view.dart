@@ -3,8 +3,8 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../widgets/custom_chage_page.dart';
-import '../../widgets/custom_text_field.dart';
+import '../../../utils/custom_chage_page.dart';
+import '../../../utils/custom_text_field.dart';
 import '../controllers/signin_controller.dart';
 
 class SigninView extends GetView<SigninController> {

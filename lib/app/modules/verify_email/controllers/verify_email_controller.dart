@@ -1,10 +1,12 @@
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_cafe/app/routes/app_pages.dart';
+import '../../../routes/app_pages.dart';
 
 class VerifyEmailController extends GetxController {
   final auth = FirebaseAuth.instance;
+  late Timer timer;
 
   void sendEmailVerification() async {
     try {
@@ -36,13 +38,37 @@ class VerifyEmailController extends GetxController {
     }
   }
 
+  void chekEmailVerified() async {
+    await auth.currentUser?.reload();
+    print(auth.currentUser?.emailVerified);
+    if (auth.currentUser!.emailVerified) {
+      Get.offAllNamed(Routes.HOME);
+      timer.cancel();
+    }
+  }
+
   void getBackTologin() {
-    Get.offAllNamed(Routes.LOGIN);
+    Get.offAllNamed(Routes.HOME);
   }
 
   @override
   void onInit() {
     super.onInit();
     sendEmailVerification();
+    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      chekEmailVerified();
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  void onClose() {
+    timer.cancel();
+    super.onClose();
   }
 }

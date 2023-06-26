@@ -38,7 +38,7 @@ class VerifyEmailView extends GetView<VerifyEmailController> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => controller.sendEmailVerification(),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(Get.width, 40),
                   backgroundColor: const Color(0xFF6071fd),
@@ -46,7 +46,7 @@ class VerifyEmailView extends GetView<VerifyEmailController> {
                 child: const Text('Kirim Ulang Email'),
               ),
               TextButton.icon(
-                  onPressed: () => controller.getBackTologin(),
+                  onPressed: controller.getBackTologin,
                   icon: const Icon(Icons.arrow_back),
                   label: const Text('Kembali Ke Login'))
             ],

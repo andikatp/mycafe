@@ -1,11 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-
-import '../../widgets/custom_text_field.dart';
+import '../../../utils/custom_text_field.dart';
 import '../controllers/lengkapi_controller.dart';
 
 class LengkapiView extends GetView<LengkapiController> {
@@ -16,6 +14,7 @@ class LengkapiView extends GetView<LengkapiController> {
     final theme = Get.theme;
     final width = Get.width;
     final height = Get.height;
+    String completeNumber = '';
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -127,6 +126,8 @@ class LengkapiView extends GetView<LengkapiController> {
                                     TextStyle(color: Colors.grey.shade500),
                               ),
                               initialCountryCode: 'ID',
+                              onChanged: (value) =>
+                                  completeNumber = value.completeNumber,
                               disableLengthCheck: true,
                             ),
                           ],
@@ -257,6 +258,7 @@ class LengkapiView extends GetView<LengkapiController> {
                         ? () => controller.daftarAkun(
                               emailAndPassword?['email'] as String,
                               emailAndPassword?['password'] as String,
+                              completeNumber,
                             )
                         : null,
                     style: ElevatedButton.styleFrom(

@@ -15,31 +15,25 @@ class LengkapiController extends GetxController {
   final auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance;
 
-  void daftarAkun(String email, String password) async {
+  void daftarAkun(String email, String password, String completeNumber) async {
     final isValid = formKey.currentState!.validate();
     if (isValid) {
       try {
         final userData = await auth.createUserWithEmailAndPassword(
             email: email, password: password);
         final userDoc = fireStore.collection('users').doc(userData.user?.email);
-        if (!nomorTeleponPemilik.text.startsWith('0')) {
-          nomorTeleponPemilik.text = '+62${nomorTeleponPemilik.text}';
-        }
-
         await userDoc.set({
           'uid': userData.user?.uid,
           'email': userData.user?.email,
           'nama_cafe': namaCafe.text,
           'nama_pemilik': namaPemilik.text,
-          'nomorTeleponPemilik': nomorTeleponPemilik.text,
+          'nomorTeleponPemilik': completeNumber,
           'jumlahLantai': jumlahLantai.text,
           'jumlahKursiPerLantai': jumlahKursiPerLantai.text,
           'alamatCafe': alamatCafe.text,
           'createdAt': userData.user?.metadata.creationTime,
           'updatedAt': DateTime.now().toIso8601String(),
         });
-        final currentUser = FirebaseAuth.instance.currentUser;
-        print(currentUser);
       } on FirebaseAuthException catch (e) {
         Get.snackbar(
           'Error',
