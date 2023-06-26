@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:my_cafe/app/controllers/password_controller.dart';
 
@@ -9,6 +10,7 @@ class CustomTextfield extends GetWidget {
   final TextInputType inputType;
   final bool password;
   final String? Function(String?)? validator;
+  final bool isNumberOnly;
   const CustomTextfield({
     Key? key,
     required this.text,
@@ -17,6 +19,7 @@ class CustomTextfield extends GetWidget {
     required this.validator,
     this.inputType = TextInputType.text,
     this.password = false,
+    this.isNumberOnly = false,
   }) : super(key: key);
 
   @override
@@ -36,6 +39,9 @@ class CustomTextfield extends GetWidget {
             () => TextFormField(
               controller: textEditingController,
               keyboardType: inputType,
+              inputFormatters: isNumberOnly
+                  ? [FilteringTextInputFormatter.digitsOnly]
+                  : null,
               obscureText: passwordController.isObsecure.isFalse && password,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -101,6 +102,9 @@ class LengkapiView extends GetView<LengkapiController> {
                             const SizedBox(height: 5),
                             IntlPhoneField(
                               controller: controller.nomorTeleponPemilik,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -137,6 +141,7 @@ class LengkapiView extends GetView<LengkapiController> {
                       CustomTextfield(
                         text: 'Jumlah Lantai Cafe',
                         hintText: '1',
+                        isNumberOnly: true,
                         inputType: TextInputType.number,
                         textEditingController: controller.jumlahLantai,
                         validator: (value) {
@@ -150,6 +155,7 @@ class LengkapiView extends GetView<LengkapiController> {
                       CustomTextfield(
                         text: 'Jumlah Kursi Per Lantai',
                         hintText: '20',
+                        isNumberOnly: true,
                         inputType: TextInputType.number,
                         textEditingController: controller.jumlahKursiPerLantai,
                         validator: (p0) {

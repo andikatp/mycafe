@@ -37,13 +37,19 @@ class VerifyEmailView extends GetView<VerifyEmailController> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => controller.sendEmailVerification(),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(Get.width, 40),
-                  backgroundColor: const Color(0xFF6071fd),
+              Obx(
+                () => ElevatedButton(
+                  onPressed: controller.isButtonEnabled.value
+                      ? controller.sendEmailVerification
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(Get.width, 40),
+                    backgroundColor: const Color(0xFF6071fd),
+                  ),
+                  child: Text(controller.isButtonEnabled.value
+                      ? 'Kirim Ulang Email'
+                      : 'Tunggu ${controller.remainingTime.value} detik'),
                 ),
-                child: const Text('Kirim Ulang Email'),
               ),
               TextButton.icon(
                   onPressed: controller.getBackTologin,

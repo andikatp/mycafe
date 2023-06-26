@@ -7,9 +7,22 @@ import '../../../routes/app_pages.dart';
 class VerifyEmailController extends GetxController {
   final auth = FirebaseAuth.instance;
   late Timer timer;
+  RxBool isButtonEnabled = true.obs;
+  final remainingTime = 0.obs;
 
   void sendEmailVerification() async {
     try {
+      if (isButtonEnabled.isTrue) {
+        isButtonEnabled.value = false;
+        remainingTime.value = 60;
+        Timer.periodic(const Duration(seconds: 1), (timer) {
+          remainingTime.value--;
+          if (remainingTime.value <= 0) {
+            isButtonEnabled.value = true;
+            timer.cancel();
+          }
+        });
+      }
       await auth.currentUser?.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
@@ -40,8 +53,8 @@ class VerifyEmailController extends GetxController {
 
   void chekEmailVerified() async {
     await auth.currentUser?.reload();
-    print(auth.currentUser?.emailVerified);
     if (auth.currentUser!.emailVerified) {
+      print(auth.currentUser!.emailVerified);
       Get.offAllNamed(Routes.HOME);
       timer.cancel();
     }
