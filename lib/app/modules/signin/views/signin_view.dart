@@ -3,7 +3,6 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:my_cafe/app/routes/app_pages.dart';
 import '../../widgets/custom_chage_page.dart';
 import '../../widgets/custom_text_field.dart';
 import '../controllers/signin_controller.dart';
@@ -14,6 +13,10 @@ class SigninView extends GetView<SigninController> {
   Widget build(BuildContext context) {
     final width = Get.width;
     final theme = Get.theme;
+    final String? email = Get.arguments;
+    if (email != null) {
+      controller.emailController.text = email;
+    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Form(
@@ -141,7 +144,7 @@ class SigninView extends GetView<SigninController> {
             CustomChangePage(
               message: 'Belum punya akun?',
               keyMessage: ' Daftar',
-              function: () => Get.offAndToNamed(Routes.SIGNUP),
+              function: controller.goToSignUp,
             ),
           ],
         ),

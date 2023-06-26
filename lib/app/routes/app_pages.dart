@@ -8,6 +8,8 @@ import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/verify_email/bindings/verify_email_binding.dart';
+import '../modules/verify_email/views/verify_email_view.dart';
 
 part 'app_routes.dart';
 
@@ -41,6 +43,11 @@ class AppPages {
       page: () => const LengkapiView(),
       binding: LengkapiBinding(),
       transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: _Paths.VERIFY_EMAIL,
+      page: () => const VerifyEmailView(),
+      binding: VerifyEmailBinding(),
     ),
   ];
 }
