@@ -102,7 +102,7 @@ class SignupView extends GetView<SignupController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () => controller.signUpWithGmail(),
                             iconSize: 40,
                             splashRadius: 30,
                             icon:

@@ -36,6 +36,12 @@ class SigninView extends GetView<SigninController> {
                           'assets/logo/bglogo.json',
                           height: 150,
                           width: 150,
+                          controller: controller.animationController,
+                          onLoaded: (composotion) =>
+                              controller.animationController
+                                ..duration = composotion.duration * 1.7
+                                ..repeat(),
+                          repeat: true,
                         ),
                         Image.asset(
                           'assets/images/logo.png',
@@ -107,7 +113,7 @@ class SigninView extends GetView<SigninController> {
                       child: Obx(
                         () => ElevatedButton(
                           onPressed: controller.isEnabled.isTrue
-                              ? () => controller.signIn()
+                              ? () => controller.signInUsingEmailAndPassword()
                               : null,
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(width, 50),
@@ -129,7 +135,7 @@ class SigninView extends GetView<SigninController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () => controller.signInUsingGoogle(),
                             iconSize: 40,
                             splashRadius: 30,
                             icon:

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +12,7 @@ class LengkapiView extends GetView<LengkapiController> {
   const LengkapiView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final Map<String, String>? emailAndPassword = Get.arguments;
+    final Map<String, dynamic>? emailAndPassword = Get.arguments;
     final theme = Get.theme;
     final width = Get.width;
     final height = Get.height;
@@ -261,11 +262,24 @@ class LengkapiView extends GetView<LengkapiController> {
                 Obx(
                   () => ElevatedButton(
                     onPressed: controller.isEnabled.isTrue
-                        ? () => controller.daftarAkun(
-                              emailAndPassword?['email'] as String,
-                              emailAndPassword?['password'] as String,
-                              completeNumber,
-                            )
+                        ? () {
+                            if (emailAndPassword?['method'] == 'gmail') {
+                              controller.daftarAkunMenggunakanGoogleSignIn(
+                                  emailAndPassword?['email'] as String,
+                                  completeNumber,
+                                  emailAndPassword!['credential']
+                                      as OAuthCredential);
+                              print('gmail');
+                            } else if (emailAndPassword?['method'] ==
+                                'emailandpassword') {
+                              controller.daftarAkunMenggunakanEmaildanPassword(
+                                emailAndPassword?['email'] as String,
+                                emailAndPassword?['password'] as String,
+                                completeNumber,
+                              );
+                              print('email');
+                            }
+                          }
                         : null,
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(
