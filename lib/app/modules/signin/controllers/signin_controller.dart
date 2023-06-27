@@ -94,6 +94,10 @@ class SigninController extends GetxController
     Get.offAllNamed(Routes.SIGNUP);
   }
 
+  void goToLupaPassword() {
+    Get.toNamed(Routes.LUPA_PASSWORD);
+  }
+
   @override
   void onInit() {
     emailController = TextEditingController()

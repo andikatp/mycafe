@@ -24,7 +24,7 @@ class SigninView extends GetView<SigninController> {
         child: Column(
           children: [
             const SizedBox(
-              height: 50,
+              height: 30,
             ),
             KeyboardVisibilityBuilder(
               builder: (context, isKeyboardVisible) => isKeyboardVisible
@@ -101,6 +101,14 @@ class SigninView extends GetView<SigninController> {
                 }
                 return null;
               },
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: TextButton(
+                    onPressed: () {}, child: const Text('Lupa Password?')),
+              ),
             ),
             const SizedBox(height: 20),
             Obx(

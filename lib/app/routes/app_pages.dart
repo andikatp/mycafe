@@ -1,9 +1,15 @@
 import 'package:get/get.dart';
 
+import '../modules/create_new_password/bindings/create_new_password_binding.dart';
+import '../modules/create_new_password/views/create_new_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/lengkapi/bindings/lengkapi_binding.dart';
 import '../modules/lengkapi/views/lengkapi_view.dart';
+import '../modules/lupa_password/bindings/lupa_password_binding.dart';
+import '../modules/lupa_password/views/lupa_password_view.dart';
+import '../modules/lupa_password_email/bindings/lupa_password_email_binding.dart';
+import '../modules/lupa_password_email/views/lupa_password_email_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -48,6 +54,22 @@ class AppPages {
       name: _Paths.VERIFY_EMAIL,
       page: () => const VerifyEmailView(),
       binding: VerifyEmailBinding(),
+    ),
+    GetPage(
+      name: _Paths.LUPA_PASSWORD,
+      page: () => const LupaPasswordView(),
+      binding: LupaPasswordBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: _Paths.LUPA_PASSWORD_EMAIL,
+      page: () => const LupaPasswordEmailView(),
+      binding: LupaPasswordEmailBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_NEW_PASSWORD,
+      page: () => const CreateNewPasswordView(),
+      binding: CreateNewPasswordBinding(),
     ),
   ];
 }
