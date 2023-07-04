@@ -102,6 +102,12 @@ class LengkapiView extends GetView<LengkapiController> {
                             ),
                             const SizedBox(height: 5),
                             IntlPhoneField(
+                              dropdownTextStyle: const TextStyle(
+                                fontSize: 16,
+                              ),
+                              languageCode: 'id',
+                              flagsButtonMargin: EdgeInsets.zero,
+                              flagsButtonPadding: EdgeInsets.zero,
                               controller: controller.nomorTeleponPemilik,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
@@ -124,8 +130,6 @@ class LengkapiView extends GetView<LengkapiController> {
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide:
                                         BorderSide(color: theme.primaryColor)),
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
                                 hintText: '812 3456 7890',
                                 hintStyle:
                                     TextStyle(color: Colors.grey.shade500),
