@@ -107,7 +107,8 @@ class SigninView extends GetView<SigninController> {
               child: Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: TextButton(
-                    onPressed: () {}, child: const Text('Lupa Password?')),
+                    onPressed: () => controller.goToLupaPassword(),
+                    child: const Text('Lupa Password?')),
               ),
             ),
             const SizedBox(height: 20),

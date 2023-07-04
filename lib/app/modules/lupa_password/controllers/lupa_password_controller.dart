@@ -6,9 +6,9 @@ class LupaPasswordController extends GetxController {
   late final TextEditingController emailController;
   final isEnabled = false.obs;
 
-  void getToTheNextPage() {
-    Get.offAllNamed(Routes.LUPA_PASSWORD_EMAIL,
-        arguments: emailController.text);
+  void pergiKeLupaPasswordEmail() {
+    Get.toNamed(Routes.LUPA_PASSWORD_EMAIL,
+        arguments: emailController.text.trim());
   }
 
   @override

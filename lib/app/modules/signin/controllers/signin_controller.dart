@@ -57,7 +57,8 @@ class SigninController extends GetxController
       bool? isValidate = formKey.currentState?.validate();
       if (isValidate!) {
         await auth.signInWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text);
+            email: emailController.text.trim(),
+            password: passwordController.text.trim());
       }
       isLoading.toggle();
     } on FirebaseAuthException catch (e) {

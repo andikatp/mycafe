@@ -45,9 +45,9 @@ class SignupController extends GetxController {
         Get.offAllNamed(Routes.SIGNIN, arguments: email);
       } else {
         Get.toNamed(Routes.LENGKAPI, arguments: {
-          'email': emailController.text,
-          'password': passwordController.text,
-          'method': 'gmail'
+          'email': emailController.text.trim(),
+          'password': passwordController.text.trim(),
+          'method': 'emailandpassword'
         });
       }
     }
@@ -73,7 +73,7 @@ class SignupController extends GetxController {
         );
       } else {
         Get.toNamed(Routes.LENGKAPI, arguments: {
-          'email': emailController.text,
+          'email': emailController.text.trim(),
           'method': 'gmail',
           'credential': credential
         });

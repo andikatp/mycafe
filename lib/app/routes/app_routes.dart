@@ -4,7 +4,6 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
-  static const LOGIN = _Paths.LOGIN;
   static const SIGNUP = _Paths.SIGNUP;
   static const SIGNIN = _Paths.SIGNIN;
   static const LENGKAPI = _Paths.LENGKAPI;
@@ -12,12 +11,12 @@ abstract class Routes {
   static const LUPA_PASSWORD = _Paths.LUPA_PASSWORD;
   static const LUPA_PASSWORD_EMAIL = _Paths.LUPA_PASSWORD_EMAIL;
   static const CREATE_NEW_PASSWORD = _Paths.CREATE_NEW_PASSWORD;
+  static const PEMESANAN = _Paths.PEMESANAN;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
-  static const LOGIN = '/login';
   static const SIGNUP = '/signup';
   static const SIGNIN = '/signin';
   static const LENGKAPI = '/lengkapi';
@@ -25,4 +24,5 @@ abstract class _Paths {
   static const LUPA_PASSWORD = '/lupa-password';
   static const LUPA_PASSWORD_EMAIL = '/lupa-password-email';
   static const CREATE_NEW_PASSWORD = '/create-new-password';
+  static const PEMESANAN = '/pemesanan';
 }

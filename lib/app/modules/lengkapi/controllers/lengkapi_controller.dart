@@ -32,12 +32,13 @@ class LengkapiController extends GetxController {
         await userDoc.set({
           'uid': userData.user?.uid,
           'email': userData.user?.email,
-          'nama_cafe': namaCafe.text,
-          'nama_pemilik': namaPemilik.text,
-          'nomorTeleponPemilik': completeNumber,
-          'jumlahLantai': int.tryParse(jumlahLantai.text),
-          'jumlahKursiPerLantai': int.tryParse(jumlahKursiPerLantai.text),
-          'alamatCafe': alamatCafe.text,
+          'nama_cafe': namaCafe.text.trim(),
+          'nama_pemilik': namaPemilik.text.trim(),
+          'nomorTeleponPemilik': completeNumber.trim(),
+          'jumlahLantai': int.tryParse(jumlahLantai.text.trim()),
+          'jumlahKursiPerLantai':
+              int.tryParse(jumlahKursiPerLantai.text.trim()),
+          'alamatCafe': alamatCafe.text.trim(),
           'createdAt': userData.user?.metadata.creationTime,
           'updatedAt': DateTime.now().toIso8601String(),
         });
@@ -85,12 +86,13 @@ class LengkapiController extends GetxController {
         await userDoc.set({
           'uid': userData.user?.uid,
           'email': userData.user?.email,
-          'nama_cafe': namaCafe.text,
-          'nama_pemilik': namaPemilik.text,
-          'nomorTeleponPemilik': completeNumber,
-          'jumlahLantai': int.tryParse(jumlahLantai.text),
-          'jumlahKursiPerLantai': int.tryParse(jumlahKursiPerLantai.text),
-          'alamatCafe': alamatCafe.text,
+          'nama_cafe': namaCafe.text.trim(),
+          'nama_pemilik': namaPemilik.text.trim(),
+          'nomorTeleponPemilik': completeNumber.trim(),
+          'jumlahLantai': int.tryParse(jumlahLantai.text.trim()),
+          'jumlahKursiPerLantai':
+              int.tryParse(jumlahKursiPerLantai.text.trim()),
+          'alamatCafe': alamatCafe.text.trim(),
           'createdAt': userData.user?.metadata.creationTime,
           'updatedAt': DateTime.now().toIso8601String(),
         });

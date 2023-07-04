@@ -10,6 +10,7 @@ class LupaPasswordEmailView extends GetView<LupaPasswordEmailController> {
   Widget build(BuildContext context) {
     final theme = Get.theme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
@@ -50,15 +51,25 @@ class LupaPasswordEmailView extends GetView<LupaPasswordEmailController> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(
-                          170,
-                          40,
+                    Obx(
+                      () => ElevatedButton(
+                        onPressed: controller.isButtonEnabled.isTrue
+                            ? controller.kirimEmailLupaPassword
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(
+                            170,
+                            40,
+                          ),
                         ),
+                        child: Text(controller.isButtonEnabled.value
+                            ? 'Kirim Ulang Email'
+                            : 'Tunggu ${controller.remainingTime.value} detik'),
                       ),
-                      child: const Text('Kirim Ulang'),
+                    ),
+                    TextButton(
+                      onPressed: () => controller.pergiKeLogin(),
+                      child: const Text('Kembali ke login'),
                     ),
                   ],
                 ),

@@ -41,6 +41,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: TextField(
                 controller: controller.emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -67,7 +68,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
             Obx(
               () => ElevatedButton(
                 onPressed: controller.isEnabled.isTrue
-                    ? () => controller.getToTheNextPage()
+                    ? () => controller.pergiKeLupaPasswordEmail()
                     : null,
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(

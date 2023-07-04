@@ -10,6 +10,8 @@ import '../modules/lupa_password/bindings/lupa_password_binding.dart';
 import '../modules/lupa_password/views/lupa_password_view.dart';
 import '../modules/lupa_password_email/bindings/lupa_password_email_binding.dart';
 import '../modules/lupa_password_email/views/lupa_password_email_view.dart';
+import '../modules/pemesanan/bindings/pemesanan_binding.dart';
+import '../modules/pemesanan/views/pemesanan_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -70,6 +72,11 @@ class AppPages {
       name: _Paths.CREATE_NEW_PASSWORD,
       page: () => const CreateNewPasswordView(),
       binding: CreateNewPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.PEMESANAN,
+      page: () => const PemesananView(),
+      binding: PemesananBinding(),
     ),
   ];
 }

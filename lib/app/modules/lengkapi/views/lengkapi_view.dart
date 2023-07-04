@@ -269,7 +269,6 @@ class LengkapiView extends GetView<LengkapiController> {
                                   completeNumber,
                                   emailAndPassword!['credential']
                                       as OAuthCredential);
-                              print('gmail');
                             } else if (emailAndPassword?['method'] ==
                                 'emailandpassword') {
                               controller.daftarAkunMenggunakanEmaildanPassword(
@@ -277,7 +276,6 @@ class LengkapiView extends GetView<LengkapiController> {
                                 emailAndPassword?['password'] as String,
                                 completeNumber,
                               );
-                              print('email');
                             }
                           }
                         : null,

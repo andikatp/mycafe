@@ -54,14 +54,13 @@ class VerifyEmailController extends GetxController {
   void chekEmailVerified() async {
     await auth.currentUser?.reload();
     if (auth.currentUser!.emailVerified) {
-      print(auth.currentUser!.emailVerified);
       Get.offAllNamed(Routes.HOME);
       timer.cancel();
     }
   }
 
   void getBackTologin() {
-    Get.offAllNamed(Routes.HOME);
+    Get.offAllNamed(Routes.SIGNIN);
   }
 
   @override
