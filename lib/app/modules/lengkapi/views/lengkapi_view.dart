@@ -276,6 +276,12 @@ class LengkapiView extends GetView<LengkapiController> {
                                 emailAndPassword?['password'] as String,
                                 completeNumber,
                               );
+                            } else if (emailAndPassword?['method'] ==
+                                'facebook') {
+                              controller.daftarAkunMenggunakanFacebook(
+                                  emailAndPassword?['email'] as String,
+                                  completeNumber,
+                                  emailAndPassword?['credential']);
                             }
                           }
                         : null,

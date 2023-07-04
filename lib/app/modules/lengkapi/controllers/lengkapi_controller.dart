@@ -74,6 +74,61 @@ class LengkapiController extends GetxController {
     }
   }
 
+  void daftarAkunMenggunakanFacebook(
+      String email, String completeNumber, OAuthCredential credential) async {
+    isLoading.toggle();
+    isLoading.toggle();
+    final isValid = formKey.currentState!.validate();
+    if (isValid) {
+      try {
+        final UserCredential userData =
+            await auth.signInWithCredential(credential);
+        final userDoc = fireStore.collection('users').doc(userData.user?.email);
+        await userDoc.set({
+          'uid': userData.user?.uid,
+          'email': userData.user?.email,
+          'nama_cafe': namaCafe.text.trim(),
+          'nama_pemilik': namaPemilik.text.trim(),
+          'nomorTeleponPemilik': completeNumber.trim(),
+          'jumlahLantai': int.tryParse(jumlahLantai.text.trim()),
+          'jumlahKursiPerLantai':
+              int.tryParse(jumlahKursiPerLantai.text.trim()),
+          'alamatCafe': alamatCafe.text.trim(),
+          'createdAt': userData.user?.metadata.creationTime,
+          'updatedAt': DateTime.now().toIso8601String(),
+        });
+        isLoading.toggle();
+      } on FirebaseAuthException catch (e) {
+        Get.snackbar(
+          'Error',
+          e.message ?? 'No Messages',
+          backgroundColor: Colors.grey.shade300,
+          borderWidth: 0.2,
+          duration: const Duration(seconds: 2),
+        );
+        isLoading.toggle();
+      } on FirebaseException catch (e) {
+        Get.snackbar(
+          'Error',
+          e.message ?? 'No Messages',
+          backgroundColor: Colors.grey.shade300,
+          borderWidth: 0.2,
+          duration: const Duration(seconds: 2),
+        );
+        isLoading.toggle();
+      } catch (e) {
+        Get.snackbar(
+          'Error',
+          'Terjadi kesalahan!, silahkan coba lagi nanti',
+          backgroundColor: Colors.grey.shade300,
+          borderWidth: 0.2,
+          duration: const Duration(seconds: 2),
+        );
+        isLoading.toggle();
+      }
+    }
+  }
+
   void daftarAkunMenggunakanEmaildanPassword(
       String email, String password, String completeNumber) async {
     isLoading.toggle();

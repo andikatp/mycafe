@@ -102,14 +102,16 @@ class SignupView extends GetView<SignupController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            onPressed: () => controller.signUpWithGmail(),
+                            onPressed: () =>
+                                controller.signUpMenggunakanGmail(),
                             iconSize: 40,
                             splashRadius: 30,
                             icon:
                                 SvgPicture.asset('assets/logo/logoGoogle.svg'),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () =>
+                                controller.signUpMenggunakanFacebook(),
                             iconSize: 50,
                             splashRadius: 30,
                             icon: const Icon(
@@ -132,9 +134,10 @@ class SignupView extends GetView<SignupController> {
                       child: Obx(
                         () => ElevatedButton(
                           onPressed: controller.isEnabled.isTrue
-                              ? () => controller.signUpWithEmailAndPassword(
-                                  controller.emailController.text,
-                                  controller.passwordController.text)
+                              ? () =>
+                                  controller.signUpMenggunakanEmailDanPassword(
+                                      controller.emailController.text,
+                                      controller.passwordController.text)
                               : null,
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(double.infinity, 50),

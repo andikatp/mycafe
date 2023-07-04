@@ -122,7 +122,8 @@ class SigninView extends GetView<SigninController> {
                       child: Obx(
                         () => ElevatedButton(
                           onPressed: controller.isEnabled.isTrue
-                              ? () => controller.signInUsingEmailAndPassword()
+                              ? () =>
+                                  controller.signInMenggunakanEmailAndPassword()
                               : null,
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(width, 50),
@@ -144,14 +145,16 @@ class SigninView extends GetView<SigninController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            onPressed: () => controller.signInUsingGoogle(),
+                            onPressed: () =>
+                                controller.signInMenggunakanGoogle(),
                             iconSize: 40,
                             splashRadius: 30,
                             icon:
                                 SvgPicture.asset('assets/logo/logoGoogle.svg'),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () =>
+                                controller.signInMenggunakanFacebook(),
                             iconSize: 50,
                             splashRadius: 30,
                             icon: const Icon(

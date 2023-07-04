@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_cafe/app/routes/app_pages.dart';
@@ -14,18 +15,23 @@ class SigninController extends GetxController
   final auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FacebookAuth _facebookSignIn = FacebookAuth.instance;
 
   RxBool isEnabled = false.obs;
   RxBool isLoading = false.obs;
 
-  void signInUsingGoogle() async {
+  Future<bool> checkUserDenganEmailYangSama(String? email) async {
+    final CollectionReference usersCollection =
+        FirebaseFirestore.instance.collection('users');
+    final DocumentSnapshot checkUserDenganEmailYangSama =
+        await usersCollection.doc(email).get();
+    return checkUserDenganEmailYangSama.exists;
+  }
+
+  void signInMenggunakanGoogle() async {
     try {
       final googleAccount = await _googleSignIn.signIn();
-      final CollectionReference usersCollection =
-          FirebaseFirestore.instance.collection('users');
-      final DocumentSnapshot userWithTheSameEmail =
-          await usersCollection.doc(googleAccount?.email).get();
-      if (!userWithTheSameEmail.exists) {
+      if (!await checkUserDenganEmailYangSama(googleAccount?.email)) {
         Get.snackbar(
           'Error',
           'Akun gmail tidak ditemukan, silahkan daftar terlebih dahulu',
@@ -34,12 +40,13 @@ class SigninController extends GetxController
           duration: const Duration(seconds: 2),
         );
         Get.offAllNamed(Routes.SIGNUP);
+      } else {
+        final GoogleSignInAuthentication? googleAuth =
+            await googleAccount?.authentication;
+        final OAuthCredential credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+        await auth.signInWithCredential(credential);
       }
-      final GoogleSignInAuthentication? googleAuth =
-          await googleAccount?.authentication;
-      final OAuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-      await auth.signInWithCredential(credential);
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -51,7 +58,41 @@ class SigninController extends GetxController
     }
   }
 
-  void signInUsingEmailAndPassword() async {
+  void signInMenggunakanFacebook() async {
+    try {
+      final LoginResult result = await _facebookSignIn.login();
+      if (result.status == LoginStatus.success) {
+        final userData = await FacebookAuth.instance.getUserData();
+        final String email = userData['email'];
+        if (!await checkUserDenganEmailYangSama(email)) {
+          Get.snackbar(
+            'Error',
+            'Akun facebook tidak ditemukan, silahkan daftar terlebih dahulu',
+            backgroundColor: Colors.grey.shade300,
+            borderWidth: 0.2,
+            duration: const Duration(seconds: 2),
+          );
+          Get.offAllNamed(Routes.SIGNUP);
+        } else {
+          final token = result.accessToken!.token;
+          final credential = FacebookAuthProvider.credential(token);
+          await auth.signInWithCredential(credential);
+        }
+      } else {
+        Get.snackbar(
+          'Error',
+          'Periksa Koneksi Anda',
+          backgroundColor: Colors.grey.shade300,
+          borderWidth: 0.2,
+          duration: const Duration(seconds: 2),
+        );
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void signInMenggunakanEmailAndPassword() async {
     try {
       isLoading.toggle();
       bool? isValidate = formKey.currentState?.validate();
