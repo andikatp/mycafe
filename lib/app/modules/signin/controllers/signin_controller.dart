@@ -17,8 +17,8 @@ class SigninController extends GetxController
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookAuth _facebookSignIn = FacebookAuth.instance;
 
-  RxBool isEnabled = false.obs;
-  RxBool isLoading = false.obs;
+  RxBool isEnabled = RxBool(false);
+  RxBool isLoading = RxBool(false);
 
   Future<bool> checkUserDenganEmailYangSama(String? email) async {
     final CollectionReference usersCollection =
